@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoldenCodes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+    <style>
+        body {
+            background-color: #000000;
+            color: #FFD700; /* Amarillo dorado */
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .navbar {
+            background-color: #000000;
+        }
+        .navbar-brand, .nav-link {
+            color: #FFD700 !important;
+            font-weight: bold;
+        }
+        .nav-link:hover {
+            color: #FFA500 !important;
+        }
+        section {
+            padding: 100px 0;
+        }
+        .intro {
+            text-align: center;
+            background: linear-gradient(to bottom, #111111, #000000);
+        }
+        .quienes-somos {
+            background-color: #111111;
+        }
+        .premios {
+            background-color: #1a1a1a;
+        }
+        .card {
+            background-color: #000000;
+            border: 2px solid #FFD700;
+            color: #FFD700;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px #FFD700;
+        }
+        .card-title {
+            color: #FFD700;
+        }
+        .card-text {
+            color: #f8e473;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Gala de Premios</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon" style="color: #FFD700;"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link" href="#introduccion">Introducción</a></li>
+                <li class="nav-item"><a class="nav-link" href="#quienes-somos">Quiénes Somos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#premios">Premios</a></li>
+                <!-- Botón destacado -->
+                <li class="nav-item ms-3">
+                    <a class="btn btn-warning text-dark fw-bold" href="votacion" style="border: 2px solid #FFD700;">Haz tu voto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Introducción -->
+    <section id="introduccion" class="intro">
+        <div class="container">
+            <h1>Bienvenidos a la Gala de Premios</h1>
+            <p style="font-size: 1.2rem;">Una noche de elegancia, emoción y reconocimiento a lo mejor del año.</p>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos -->
+    <section id="quienes-somos" class="quienes-somos">
+        <div class="container">
+            <h2 class="text-center">Quiénes Somos</h2>
+            <p class="text-center" style="max-width: 800px; margin: auto;">
+                Somos un equipo apasionado por reconocer el talento y esfuerzo de los mejores. 
+                Cada gala es un evento único lleno de glamour y distinción.
+            </p>
+        </div>
+    </section>
+
+    <!-- Premios -->
+    <section id="premios" class="premios">
+        <div class="container">
+            <h2 class="text-center mb-5">Categorías de Premios</h2>
+            <div class="row g-4">
+                <!-- Premio 1 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h4 class="card-title">Mejor Actor</h4>
+                        <p class="card-text">Reconociendo la actuación más destacada en cine o teatro.</p>
+                    </div>
+                </div>
+                <!-- Premio 2 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h4 class="card-title">Mejor Actriz</h4>
+                        <p class="card-text">Celebrando la actuación femenina más sobresaliente del año.</p>
+                    </div>
+                </div>
+                <!-- Premio 3 -->
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h4 class="card-title">Premio Innovación</h4>
+                        <p class="card-text">Para quienes han traído creatividad y originalidad a su industria.</p>
+                    </div>
+                </div>
+                <!-- Puedes añadir más premios aquí -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

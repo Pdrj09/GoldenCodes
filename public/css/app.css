@@ -1,0 +1,86 @@
+/* estilos.css */
+
+body {
+    background-color: #000000;
+    color: #FFD700; /* Amarillo dorado */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #000000;
+}
+
+.navbar-brand, .nav-link {
+    color: #FFD700 !important;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #FFA500 !important;
+}
+
+/* Botón destacado "Haz tu voto" */
+.btn-voto {
+    background-color: #FFD700;
+    color: #000000;
+    font-weight: bold;
+    border: 2px solid #FFD700;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-voto:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px #FFD700;
+    text-decoration: none;
+}
+
+/* Secciones */
+section {
+    padding: 100px 0;
+}
+
+.intro {
+    text-align: center;
+    background: linear-gradient(to bottom, #111111, #000000);
+}
+
+.quienes-somos {
+    background-color: #111111;
+}
+
+.premios {
+    background-color: #1a1a1a;
+}
+
+/* Cards de premios */
+.card {
+    background-color: #000000;
+    border: 2px solid #FFD700;
+    color: #FFD700;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px #FFD700;
+}
+
+.card-title {
+    color: #FFD700;
+}
+
+.card-text {
+    color: #f8e473;
+}
+
+/* Enlaces generales */
+a {
+    text-decoration: none;
+}
