@@ -62,20 +62,10 @@
                     <form action="/votacion" method="POST" class="form-voto p-5 shadow-lg">
                         {{ csrfField() }}
 
-                        <!-- Nombre -->
-                        <div class="mb-4">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre"
-                                placeholder="Tu nombre completo" required>
-                        </div>
-
-                        <hr>
-
-                        <!-- Correo -->
-                        <div class="mb-4">
-                            <label for="correo" class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="correo" name="correo"
-                                placeholder="tu@email.com" required>
+                        <div class="alert alert-info mb-4">
+                            @if(auth.user)
+                                <p class="mb-0"><strong>Votando como:</strong> {{ auth.user.nombre }} ({{ auth.user.email }})</p>
+                            @endif
                         </div>
 
                         <hr>
@@ -99,7 +89,7 @@
                         <div id="opciones-carrera" class="mb-4" style="display: none;">
                             <hr>
                             <label for="carrera-select">Carrera:</label>
-                            <select id="carrera-select" name="carrera" class="form-select" required>
+                            <select id="carrera-select" name="carrera" class="form-select">
                                 <option value="" disabled selected>Elige una carrera</option>
                                 <option value="SI">Ingeniería de Sistema de la informacion</option>
                                 <option value="Software">Ingenieria de Software</option>
@@ -112,7 +102,7 @@
                         <div id="opciones-master" class="mb-4" style="display: none;">
                             <hr>
                             <label for="carrera-select">Master:</label>
-                            <select id="carrera-select" name="carrera" class="form-select" required>
+                            <select id="master-select" name="carrera" class="form-select">
                                 <option value="" disabled selected>Elige una master</option>
                                 <option value="ingenieria-sistemas">Master Desarrollo Web</option>
                                 <option value="diseño-industrial">Master de Sistemas Empotrados</option>
@@ -124,8 +114,8 @@
                         <hr>
                         <!-- Categoria -->
                         <div id="opciones-categoria" class="mb-4">
-                            <label for="profesor-select">Categoria:</label>
-                            <select id="profesor-select" name="profesor" class="form-select" required>
+                            <label for="categoria-select">Categoria:</label>
+                            <select id="categoria-select" name="categoria" class="form-select" required>
                                 <option value="" disabled selected>Elige un categoria</option>
                                 <option id="inovacion" value="juan-perez">Inovacion</option>
                                 <option id="favoritismo" value="ana-lopez">Favoritismo</option>
@@ -182,19 +172,56 @@
 const selectCurso = document.getElementById("curso-select");
 const divCarrera = document.getElementById("opciones-carrera");
 const divMaster = document.getElementById("opciones-master");
+const selectProfesor = document.getElementById("profesor-select");
+
+// Data from controller
+const profesores = {{{ JSON.stringify(profesores) }}};
 
 selectCurso.addEventListener("change", function() {
     const opcion = this.options[this.selectedIndex];
+    const cursoSeleccionado = this.value;
 
+    // Mostrar/Ocultar carreras/master
     if (opcion.classList.contains("Cursos")) {
         divCarrera.style.display = "block";
         divMaster.style.display = "none";
+        document.getElementById("carrera-select").setAttribute("required", "");
+        document.querySelector("#opciones-master select").removeAttribute("required");
     } else if(opcion.classList.contains("Master")){
         divMaster.style.display="block";
         divCarrera.style.display = "none";
+        document.querySelector("#opciones-master select").setAttribute("required", "");
+        document.getElementById("carrera-select").removeAttribute("required");
     } else {
         divCarrera.style.display = "none";
         divMaster.style.display = "none";
+        document.getElementById("carrera-select").removeAttribute("required");
+        document.querySelector("#opciones-master select").removeAttribute("required");
+    }
+
+    // Filtrar profesores
+    selectProfesor.innerHTML = '<option value="" disabled selected>Elige un profesor</option>';
+    
+    const profesoresFiltrados = profesores.filter(p => p.curso === cursoSeleccionado);
+    
+    profesoresFiltrados.forEach(p => {
+        const option = document.createElement("option");
+        option.value = p.id;
+        option.textContent = `${p.nombre} - ${p.categoria}`;
+        selectProfesor.appendChild(option);
+    });
+});
+
+// Confirmación de envío
+const form = document.querySelector('.form-voto');
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const profesorSelect = document.getElementById('profesor-select');
+    const profesorNombre = profesorSelect.options[profesorSelect.selectedIndex].text;
+    
+    if (confirm(`¿Estás seguro de que quieres votar por ${profesorNombre}?`)) {
+        this.submit();
     }
 });
 </script>

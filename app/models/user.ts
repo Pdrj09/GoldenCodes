@@ -1,30 +1,53 @@
-import { DateTime } from '../../node_modules/@types/luxon/index.js'
+
+import { DateTime } from 'luxon'
+import { BaseModel, column, belongsTo, beforeSave } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import Participante from '#models/participante'
 import hash from '@adonisjs/core/services/hash'
-import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
-import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 
-const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
-  uids: ['email'],
-  passwordColumnName: 'password',
-})
+export default class User extends BaseModel {
+  public static table = 'usuarios'
 
-export default class User extends compose(BaseModel, AuthFinder) {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
-  declare fullName: string | null
-
-  @column()
-  declare email: string
-
-  @column({ serializeAs: null })
-  declare password: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
+  @column()
+  declare nombre: string | null
+
+  @column()
+  declare categoria: string | null
+
+  @column()
+  declare email: string | null
+
+  @column({ serializeAs: null })
+  declare password: string
+
+  @column()
+  declare curso: string | null
+
+  @column()
+  declare votoParticipanteId: number | null
+
+  @column()
+  declare mensaje: string | null
+
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  @belongsTo(() => Participante, {
+    foreignKey: 'votoParticipanteId',
+  })
+  declare votoParticipante: BelongsTo<typeof Participante>
+
+  @beforeSave()
+  static async hashPassword(user: User) {
+    if (user.$dirty.password) {
+      user.password = await hash.make(user.password)
+    }
+  }
 }
