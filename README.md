@@ -31,8 +31,6 @@ El backend utiliza **AdonisJS v6**, un framework para Node.js estructurado y tip
 
 ---
 
----
-
 ## ⚙️ Instalación
 
 Debe existir una conexión a una base de datos sql
