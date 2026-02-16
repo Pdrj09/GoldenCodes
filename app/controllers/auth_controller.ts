@@ -68,6 +68,15 @@ export default class AuthController {
 
     async logout({ auth, response }: HttpContext) {
         await auth.use('web').logout()
+
+        const oidcConfig = (await import('#config/oidc')).default
+        if (oidcConfig.enabled) {
+            const logoutUrl = new URL(`${oidcConfig.issuer}/protocol/openid-connect/logout`)
+            logoutUrl.searchParams.set('post_logout_redirect_uri', oidcConfig.redirectUri!.replace('/auth/oidc/callback', '/'))
+            logoutUrl.searchParams.set('client_id', oidcConfig.clientId!)
+            return response.redirect(logoutUrl.href)
+        }
+
         return response.redirect('/')
     }
 
